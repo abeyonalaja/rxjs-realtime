@@ -9,13 +9,10 @@
     "parserOptions": {
         "sourceType": "module"
     },
-    "ecmaFeatures" {
-        "templateStrings": true
-    },
     "rules": {
         "indent": [
             "error",
-            "tab"
+            4
         ],
         "linebreak-style": [
             "error",
@@ -34,4 +31,4 @@
     "globals": {
         "Exception": false
     }
-}
+ }
