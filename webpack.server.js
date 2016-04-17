@@ -11,7 +11,7 @@ function ignoreNodeModules(context, request, callback) {
     const module = request.split("/")[0];
 
     if(nodeModules.indexOf(module) !== -1) {
-        return callback(null, "commonjs" + request);
+        return callback(null, "commonjs " + request);
     }
 
     return callback();
