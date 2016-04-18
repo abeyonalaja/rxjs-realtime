@@ -32,7 +32,7 @@ function devServerBuild(callback){
 
 
 function prodServerBuild(callback){
-    const prodServerWebpack = webpack(createServerConfig(true));
+    const prodServerWebpack = webpack(createServerConfig(false));
     prodServerWebpack.run((error, stats) => {
         outputWebpack("Prod:Server", error, stats);
         callback();
