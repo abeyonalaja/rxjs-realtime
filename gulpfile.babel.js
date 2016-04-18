@@ -39,6 +39,16 @@ function prodServerBuild(callback){
     });
 }
 
-function outputWebpack(callBack){
+function outputWebpack(label, error, stats){
+    if(error)
+        throw new Error(error)
+
+    if(stats.hasErrors()) {
+        $.util.log(stats.toString( { colors: true }))
+    } else {
+        const time = stats.endTime - stats.startTime
+        $.util.log(chalk.bgGreen(`Built ${label} in ${ time } ms`))
+    }
     
+    // $.util.log(stats.toString());
 }
