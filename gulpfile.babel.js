@@ -22,6 +22,22 @@ gulp.task("prod:server", ["clean:server"], prodServerBuild);
 // Private Server tasks
 const devServerWebpack = webpack(createServerConfig(true));
 
+function devServerWatch() {
+    devServerWebpack.watch({}, (error, stats) => {
+        outputWebpack("Dev:Server", error, stats);
+    });
+}
+
+function devServerReload() {
+    return $.nodemon({
+        script: "./build/server.js",
+        watch: "./build",
+        env: {
+            "NODE_ENV": "development",
+            "USE_WEBPACK": "true"
+        }
+    });
+}
 
 function devServerBuild(callback){
     devServerWebpack.run((error, stats) => {
