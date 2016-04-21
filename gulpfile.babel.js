@@ -21,6 +21,7 @@ gulp.task("prod:server", ["clean:server"], prodServerBuild);
 // -----------------------------
 // Private Server tasks
 const devServerWebpack = webpack(createServerConfig(true));
+gulp.task("dev", ["clean", devServerBuild])
 
 function devServerWatch() {
     devServerWebpack.watch({}, (error, stats) => {
