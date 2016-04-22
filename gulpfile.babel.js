@@ -12,16 +12,23 @@ const $ = require("gulp-load-plugins")();
 // Public Tasks
 gulp.task("clean:server", cb => rimraf("./build", cb));
 gulp.task("clean:client", cb => rimraf("./public/build", cb));
-gulp.task("clean", ["clean:server", "clean:client"]);
+gulp.task("clean", gulp.parallel("clean:server", "clean:client"));
 
-gulp.task("dev:server", ["clean:server"], devServerBuild);
+gulp.task("dev:server", gulp.series("clean:server", devServerBuild));
 
-gulp.task("prod:server", ["clean:server"], prodServerBuild);
+gulp.task("prod:server", gulp.series("clean:server", prodServerBuild));
 
 // -----------------------------
 // Private Server tasks
 const devServerWebpack = webpack(createServerConfig(true));
-gulp.task("dev", ["clean", devServerBuild])
+gulp.task("dev", gulp.series(
+    "clean",
+    devServerBuild,
+    gulp.parallel(
+        devServerWatch,
+        devServerReload
+    )
+));
 
 function devServerWatch() {
     devServerWebpack.watch({}, (error, stats) => {
