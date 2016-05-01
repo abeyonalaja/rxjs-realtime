@@ -9,8 +9,8 @@ function createConfig(isDebug) {
     const plugins = [];
 
     const cssLoader = {test: /\.css$/, loader: "style!css"};
-    const sassLoader = {test: /\.sass$/, loader: "style!css!scss"};
-    const AppEntry = ["./src/client/application.js"];
+    const sassLoader = {test: /\.scss$/, loader: "style!css!sass"};
+    const appEntry = ["./src/client/application.js"];
     
     return {
         devTool: devTool,
@@ -20,7 +20,7 @@ function createConfig(isDebug) {
         output: {
             path: path.join(dirname, "public", "build"),
             filename: "[name].js",
-            publicPath; "/build/"
+            publicPath: "/build/"
         },
         resolve: {
             alias: {
@@ -35,7 +35,8 @@ function createConfig(isDebug) {
                 cssLoader,
                 sassLoader
             ]
-        }
+        },
+        plugins: plugins
     };
 }
 
