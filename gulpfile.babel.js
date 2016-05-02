@@ -16,11 +16,24 @@ gulp.task("clean:client", cb => rimraf("./public/build", cb));
 gulp.task("clean", gulp.parallel("clean:server", "clean:client"));
 
 gulp.task("dev:server", gulp.series("clean:server", devServerBuild));
+gulp.task("dev", gulp
+          .series(
+              "clean",devServerBuild, gulp.parallel(
+                  devServerWatch, devServerReload)))
 
 gulp.task("prod:server", gulp.series("clean:server", prodServerBuild));
+gulp.task("prod:client", gulp.series("clean:client", prodClientBuild));
+gulp.task("prod", gulp.series("clean", gulp.parallel(prodServerBuild, prodClientBuild)));
 
 // -----------------------------
 // Private Server tasks
+function prodClientBuild(callback) {
+    const compiler = webpack(createClientConfig(false));
+    compiler.run((err,stats) => {
+        outputWebpack("Prod:Client", err, stats);
+        callback();
+    })
+}
 
 
 // -----------------------------
