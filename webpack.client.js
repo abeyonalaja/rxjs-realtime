@@ -1,6 +1,7 @@
 
 var path = require("path"),
-webpack = require("webpack");
+    ExtractTextPlugin = require("extract-text-webpack-plugin"),
+    webpack = require("webpack");
 
 const vendorModules = ["jquery"];
 const dirname = path.resolve("./");
@@ -16,6 +17,10 @@ function createConfig(isDebug) {
 
     if(!isDebug) {
         plugins.push(new webpack.optimize.UglifyJsPlugin());
+        plugins.push(new ExtractTextPlugin("[name].css"));
+
+        cssLoader.loader = ExtractTextPlugin.extract("style", "css");
+        sassLoader.loader = ExtractTextPlugin.extract("style", "css!sass")
     }
     
     return {
