@@ -1,12 +1,14 @@
 
-var path = require("path");
+var path = require("path")
+webpack = require("webpack");
 
+const vendorModules = ["jquery"];
 const dirname = path.resolve("./");
 
 function createConfig(isDebug) {
 
     const devTool = isDebug ? "eval-source-map" : "source-map";
-    const plugins = [];
+    const plugins = [new webpack.optimize.CommonsChunkPlugin("vendor", "vendpr.js")];
 
     const cssLoader = {test: /\.css$/, loader: "style!css"};
     const sassLoader = {test: /\.scss$/, loader: "style!css!sass"};
@@ -15,7 +17,8 @@ function createConfig(isDebug) {
     return {
         devtool: devTool,
         entry: {
-            application: appEntry
+            application: appEntry,
+            vendor: vendorModules
         },
         output: {
             path: path.join(dirname, "public", "build"),
