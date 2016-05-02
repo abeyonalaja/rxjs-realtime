@@ -16,10 +16,6 @@ function createConfig(isDebug) {
 
     if(!isDebug) {
         plugins.push(new webpack.optimize.UglifyJsPlugin());
-
-        if(!isD) {
-            plu.push(new web.op.Ugl());
-        }
     }
     
     return {
