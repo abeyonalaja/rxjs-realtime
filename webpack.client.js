@@ -13,6 +13,14 @@ function createConfig(isDebug) {
     const cssLoader = {test: /\.css$/, loader: "style!css"};
     const sassLoader = {test: /\.scss$/, loader: "style!css!sass"};
     const appEntry = ["./src/client/application.js"];
+
+    if(!isDebug) {
+        plugins.push(new webpack.optimize.UglifyJsPlugin());
+
+        if(!isD) {
+            plu.push(new web.op.Ugl());
+        }
+    }
     
     return {
         devtool: devTool,
