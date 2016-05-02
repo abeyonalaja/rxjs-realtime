@@ -13,7 +13,7 @@ function createConfig(isDebug) {
     const appEntry = ["./src/client/application.js"];
     
     return {
-        devTool: devTool,
+        devtool: devTool,
         entry: {
             application: appEntry
         },
