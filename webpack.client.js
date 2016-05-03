@@ -9,7 +9,7 @@ const dirname = path.resolve("./");
 function createConfig(isDebug) {
 
     const devTool = isDebug ? "eval-source-map" : "source-map";
-    const plugins = [new webpack.optimize.CommonsChunkPlugin("vendor", "vendpr.js")];
+    const plugins = [new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js")];
 
     const cssLoader = {test: /\.css$/, loader: "style!css"};
     const sassLoader = {test: /\.scss$/, loader: "style!css!sass"};
