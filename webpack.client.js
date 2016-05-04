@@ -3,7 +3,7 @@ var path = require("path"),
     ExtractTextPlugin = require("extract-text-webpack-plugin"),
     webpack = require("webpack");
 
-const vendorModules = ["jquery"];
+const vendorModules = ["jquery", "socket.io.client"];
 const dirname = path.resolve("./");
 
 function createConfig(isDebug) {
